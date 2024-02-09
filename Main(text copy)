@@ -1,0 +1,44 @@
+package org.example;
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        try{
+            while(true) {
+                Scanner in = new Scanner(System.in);//запуск сканнера
+                System.out.println("Введите координаты первой точки или, если хотите выйти, введите 123321:");//строка мини меню
+                System.out.println("Широта:");//просим ввести широту ну или 123321
+                double lat1 = in.nextDouble();//указываем что дабл чтобы не ругалось
+                if (lat1 == 123321)
+                    break;//короткий иф для прерывания
+                lat1 = Math.toRadians(lat1);//перевод в радианы десятичных координат потому что так надо
+                in.nextLine();//пропуск строки
+                System.out.println("Долгота:");//просим долготу
+                double lon1 = in.nextDouble();//получаем и опять просим дабл
+                lon1 =Math.toRadians(lon1);//и снова радианы
+                System.out.println("Введите координаты второй точки.");//И опять по новой
+                System.out.println("Широта:");//широта
+                double lat2 = in.nextDouble();//дабл
+                lat2=Math.toRadians(lat2);//радианы
+                System.out.println("Долгота:");//долгота
+                double lon2 = in.nextDouble();//дабл
+                lon2 = Math.toRadians(lon2);//радианы для конкретики см предыдущую точку
+                final double EARTH_RADIUS = 6378.14;//радиус Земли чуть округлен но и так сойдет
+                double lat3 = (lat2-lat1)/2;//ниже я разобрал формулу по частям т к где-то были ошибки и так их легче было найти, это собственнно разность широт попалам
+                double lon3 = (lon2-lon1)/2;//это разность долгот попалам(так надо по формуле)
+                double sin1 = Math.sin(lat3);//синус разности широт попалам
+                double sin2 = Math.sin(lon3);//синус разности долгот попалам
+                double cos1 = Math.cos(lat1);//косинус широты раз т е первой точки
+                double cos2 = Math.cos(lat2);//косинус широты два т е 2 точки
+                double pow1 = Math.pow(sin1,2);//возведение первого синуса в квадрат
+                double pow2 = Math.pow(sin2,2);//и второго туда же
+                double sqrt1 = Math.sqrt(pow1 + (cos1 * cos2 * pow2));//вычисление подкоренного выражения
+                double asin1 = Math.asin(sqrt1);//то ли арксинус то ли гаврсинусБ я точно не помню, главное есть в библиотеке и формуле
+                double result = 2 * EARTH_RADIUS * asin1;//и последняя сборка по частям с получением ответа
+                System.out.println(result);//а так же его вывод на экран
+            }
+        }
+        catch (Exception e) {
+            System.out.println("К сожалению что-то не так, попробуйте ещё раз!");//кидаем ошибку, не знаю чем вам исключение не нравится(но со слов одногрупников не нравится)
+        }
+    }
+}

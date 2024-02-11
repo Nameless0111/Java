@@ -10,6 +10,7 @@ public class Main {
                 double lat1 = in.nextDouble();//указываем что дабл чтобы не ругалось
                 if (lat1 == 123321)
                     break;//короткий иф для прерывания
+                 in.nextLine();//пропуск строки
                 lat1 = Math.toRadians(lat1);//перевод в радианы десятичных координат потому что так надо
                 System.out.println("Долгота:");//просим долготу
                 double lon1 = in.nextDouble();//получаем и опять просим дабл

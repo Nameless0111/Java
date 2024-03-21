@@ -1,0 +1,85 @@
+package org.example;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public  class Main {
+    public static void main(String[] args) {
+        String[] watchbrands = {"Casio", "Rolex", "Какой-то третий"};//список фирм часов
+        String[][] brandmarks = {
+                {watchbrands[0], "Mark1"},
+                {watchbrands[1], "Mark2"},
+                {watchbrands[2], "Mark3"}
+        };//связываем список фирм с названием марки
+        ArrayList<Customer> customers = new ArrayList<>();//массив с покупателями
+        Scanner in = new Scanner(System.in);//сканнер
+        for (int i = 0; i < 3; i++) {//цикл трёх заказов
+            System.out.println("Введите ФИО: ");
+            String fullname = in.nextLine();//ввод фио
+            System.out.println("Введите почту: ");
+            String email = in.nextLine();//ввод почты
+            System.out.println("Введите номер телефона: ");
+            String phonenumber = in.nextLine();//ввод номера телефона
+            System.out.println("Доступные марки фирм: ");
+            for (String[] position : brandmarks) {
+                System.out.println(position[1] + " - " + position[0]);
+            }//вывод связанного массива марок фирм наоборот
+            in.nextLine();//пропуск строки
+            System.out.println("Введите номер строки необходимрй модели(от 1 до 3): ");
+            String selectedmarkbrand = in.nextLine();//невероятно,но снова ввод(на этот раз строки массива с нужной моделью)
+
+            System.out.println("Введите количество часов: ");
+            int number = in.nextInt();//ввод количества часов
+
+            customers.add(new Customer(fullname, email, phonenumber, selectedmarkbrand, number));//добавления данных покупателя
+
+            for (Customer customer : customers) {
+                output(customer);
+            }//просто вывызов вывода
+
+        }
+
+
+
+    }
+    public static void output(Customer customer){//вывод
+
+            System.out.println("Customer: " + customer.getfullname());
+            System.out.println("Email: " + customer.getemail());
+            System.out.println("Phone Number: " + customer.getphonenumber());
+            System.out.println("Selected watch position: " + customer.getselectedbrandmark());
+            System.out.println("Quantity: " + customer.getnumber());
+            System.out.println();//много выводов и переход на сл строку
+
+    }
+}
+
+class Customer {//клас покупателя
+    private String fullname;
+    private String email;
+    private String phonenumber;
+    private String selectedbrandmark;
+    private int number;
+
+    public Customer(String fullName, String email, String phoneNumber, String selectedBrand, int quantity) {
+        this.fullname = fullName;
+        this.email = email;
+        this.phonenumber = phoneNumber;
+        this.selectedbrandmark = selectedBrand;
+        this.number = quantity;
+    }
+    public String getfullname() {
+        return fullname;
+    }
+    public String getemail() {
+        return email;
+    }
+    public String getphonenumber() {
+        return phonenumber;
+    }
+    public String getselectedbrandmark() {
+        return selectedbrandmark;
+    }
+    public int getnumber() {
+        return number;
+    }
+}

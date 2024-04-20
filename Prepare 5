@@ -1,0 +1,137 @@
+package org.example;
+
+import java.lang.reflect.Array;
+import java.util.Scanner;
+
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+public class Main {
+
+    public static String[][] graveyard(int k,int m) {
+        String[][] a = new String[k][m];
+        Scanner in = new Scanner(System.in);//запуск сканнера
+        System.out.println("Заполните кладбище(если место пустое введите 0):\n");
+        for(int i=0;i<k;i++) {
+            for(int j=0;j<m;j++) {
+
+                String zxc=in.next();
+
+                if (zxc.equals("0")){
+                    a[i][j]=null;
+                }
+                else{
+                a[i][j]=zxc;}
+            }
+        }
+        return a;
+    }
+    public static String[][] graveyardout(String[][] a) {
+        System.out.println("Ваше кладбище:\n");
+        for(int i=0;i<a.length;i++) {
+            for(int j=0;j<a[0].length;j++) {
+               System.out.print(a[i][j]+ "\t");
+            }
+            System.out.print("\n");
+        }
+        return a;
+    }
+    public static String[][] graveyardoutflower(String[][] a) {//не статик
+        System.out.println("Введите ряд вашего усопшего:\n");
+        Scanner in = new Scanner(System.in);//запуск сканнера
+        int x = in.nextInt();
+        System.out.println("Введите место вашего усопшего:\n");
+        int p = in.nextInt();
+        a[x-1][p-1]+=" с цветами";
+        System.out.println("Вы положили цветы на могилу!\n");
+        return a;
+    }
+    public  static void bury(String [][]a) {//не статик
+        System.out.println("Введите ряд вашего усопшего:\n");
+        Scanner in = new Scanner(System.in);//запуск сканнера
+        int x = in.nextInt();
+        System.out.println("Введите место вашего усопшего:\n");
+        int p = in.nextInt();
+        a[x-1][p-1]=null;
+        System.out.println("Вы сожгли усопшего!\n");
+    }
+    public void buryalive(String [][]a) {
+        System.out.println("Введите имя цели:\n");
+        Scanner in = new Scanner(System.in);//запуск сканнера
+        String name = in.next();
+        //if(name.equals(Person.Name)){Person.Status = "погребён";}
+    }
+    public void burndown(String [][]a) {
+        System.out.println("Введите имя цели:\n");
+        Scanner in = new Scanner(System.in);//запуск сканнера
+        String name = in.next();
+        //if(name.equals(Person.Name)){Person.Status = "сожжён";}
+    }
+    public static String[][] graveyardflower1(String[][] a/*,String[] flower*/) {//не статик
+        System.out.println("Введите ряд вашего усопшего:\n");
+        Scanner in = new Scanner(System.in);//запуск сканнера
+        int x = in.nextInt();
+        System.out.println("Введите место вашего усопшего:\n");
+        int p = in.nextInt();
+        System.out.println("Введите индекс цветка:\n");
+        int i = in.nextInt();
+        a[x-1][p-1]+=" и "/*flower[i-1]*/;
+        System.out.println("Вы положили цветок - "+/* flower[i-1]+*/" на могилу!\n");
+        return a;
+    }
+    public static String[][] graveyardcandy(String[][] a/*,String[] candy*/) {//не статик
+        System.out.println("Введите ряд вашего усопшего:\n");
+        Scanner in = new Scanner(System.in);//запуск сканнера
+        int x = in.nextInt();
+        System.out.println("Введите место вашего усопшего:\n");
+        int p = in.nextInt();
+        System.out.println("Введите индекс конфеты:\n");
+        int i = in.nextInt();
+        System.out.println("Введите количество конфет:\n");
+        int c = in.nextInt();
+        
+        a[x-1][p-1]+=" и "/*Integer.ToString(c) +flower[i-1]*/;
+        System.out.println("Вы положили цветок - "+/* flower[i-1]+*/" на могилу!\n");
+        return a;
+    }
+
+    public  static void swap(String [][]a) {
+        System.out.println("Введите ряд вашего усопшего:\n");
+        Scanner in = new Scanner(System.in);//запуск сканнера
+        int x = in.nextInt();
+        System.out.println("Введите место вашего усопшего:\n");
+        int p = in.nextInt();
+        System.out.println("Введите ряд другого усопшего:\n");
+        int z = in.nextInt();
+        System.out.println("Введите место другого усопшего:\n");
+        int e = in.nextInt();
+        String qwerty= a[x-1][p-1];
+        a[x-1][p-1]=a[z-1][e-1];
+        a[z-1][e-1]= qwerty;
+        System.out.println("Вы свапнули усопших!\n");
+
+    }
+    public void destroy(String [][]a){
+        for(int i=0;i<a.length;i++) {
+            for(int j=0;j<a[0].length;j++) {
+                    a[i][j]=null;}
+
+        }
+    }
+
+
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);//запуск сканнер
+        String[][] a = graveyard(2,3);
+        graveyardout(a);
+        graveyardoutflower(a);
+        graveyardout(a);
+        bury(a);
+        graveyardout(a);
+        swap(a);
+        graveyardout(a);
+        Main news = new Main();
+        news.destroy(a);
+        graveyardout(a);
+        }
+    }
